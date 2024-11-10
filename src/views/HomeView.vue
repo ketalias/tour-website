@@ -1,12 +1,12 @@
 <template>
   <div class="home-page">
-    <header>
+    <header class="header">
       <h1 class="title">Lavish Saint</h1>
     </header>
 
     <div class="section">
       <h1>Popular Tours</h1>
-      <div v-if="tours.length > 0">
+      <div v-if="tours.length > 0" class="tour-cards">
         <div v-for="tour in tours" :key="tour.id" class="tour-card">
           <div class="tour-images">
             <img :key="index" :src="tour.images[0]" alt="Tour Image" />
@@ -24,7 +24,7 @@
 
     <div class="section">
       <h1>Client Overview</h1>
-      <div v-if="clients.length > 0">
+      <div v-if="clients.length > 0" class="client-cards">
         <div v-for="client in clients" :key="client.id" class="client-card">
           <h3>{{ client.name }}</h3>
           <p>Rating: {{ client.rate }} stars</p>
@@ -35,6 +35,7 @@
         <p>Loading clients...</p>
       </div>
     </div>
+
     <footer-section></footer-section>
   </div>
 </template>
@@ -104,13 +105,48 @@ export default {
 }
 
 header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  width: 95vw;
+  height: 50vh;
+  background-image: url("https://news.fotocommunity.de/wp-content/uploads/2023/07/lighthouse-c4f86543-5aa2-49c2-90d2-1a49dc0d15f5.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
   margin-bottom: 50px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); // Dark overlay with 50% opacity
+    z-index: 1;
+  }
 
   .title {
     font-size: 8rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #fafcfd;
+    position: relative;
+    z-index: 2; // Ensures title appears above overlay
+  }
+
+  // Responsive font size for smaller screens
+  @media (max-width: 768px) {
+    .title {
+      font-size: 4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      font-size: 2.5rem;
+    }
   }
 }
 
@@ -130,16 +166,32 @@ header {
     color: #333;
     line-height: 1.6;
   }
+
+  .tour-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .client-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+  }
 }
 
-.tour-card,
-.client-card {
+.tour-card {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
+
+  width: calc(30% - 20px);
+  flex-shrink: 0;
 
   &:hover {
     transform: translateY(-5px);
@@ -148,16 +200,31 @@ header {
 
   .tour-images {
     max-width: 100%;
-    height: auto;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 15px;
 
     img {
       width: 100%;
-      height: auto;
+      height: 300px;
       border-radius: 8px;
     }
+  }
+}
+.client-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  width: calc(30% - 20px);
+  flex-shrink: 0;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 
   h2,
@@ -171,18 +238,6 @@ header {
   p {
     font-size: 1rem;
     color: #555;
-  }
-}
-
-.client-card {
-  p {
-    font-style: italic;
-    color: #777;
-  }
-
-  .rating {
-    font-size: 1.2rem;
-    color: #e67e22;
   }
 }
 

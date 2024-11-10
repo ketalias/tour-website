@@ -25,10 +25,10 @@ import { mapGetters } from "vuex";
 export default {
   name: "UserPageView",
   computed: {
-    ...mapGetters(["getUserReservation"]), // Use Vuex getter to access reservation data
+    ...mapGetters(["getUserReservation"]),
     reservation() {
       const reservationData = this.getUserReservation;
-      console.log("Fetched reservation data:", reservationData); // Log reservation data
+      console.log("Fetched reservation data:", reservationData);
       return reservationData;
     },
   },

@@ -38,7 +38,7 @@
         Date:
         <input type="date" v-model="reservationData.date" required />
       </label>
-      <button type="submit">Confirm Reservation</button>
+      <button type="submit">Confirm</button>
       <button type="button" @click="closeDialog">Cancel</button>
     </form>
   </div>
@@ -117,9 +117,141 @@ export default {
 <style scoped lang="scss">
 .dialog {
   position: absolute;
-  top: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 100;
-  background-color: #333;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); // Slight transparency for a modern look
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.4s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Spacing between form elements
+  }
+
+  label {
+    font-size: 1.2em;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  input {
+    padding: 10px 10px;
+    font-size: 1.1em;
+    color: #333;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #bbb;
+    }
+
+    &:focus {
+      border-color: #ff7f50;
+      box-shadow: 0 0 5px rgba(255, 127, 80, 0.5);
+      background-color: #fff;
+    }
+  }
+
+  button {
+    padding: 5px 10px;
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 90%;
+    box-sizing: border-box;
+    margin: 10px;
+
+    &:hover {
+      background-color: #ff6347;
+      box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+    }
+
+    &.cancel {
+      background-color: #f1f1f1;
+      color: #333;
+      box-shadow: none;
+
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  }
+
+  .cancel {
+    margin-top: 10px;
+  }
+
+  .reserve-header {
+    font-size: 1.6em;
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  // Button for submitting form
+  .submit-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialog {
+    width: 90%;
+    padding: 20px;
+    max-width: 500px;
+  }
+
+  .reserve-header {
+    font-size: 1.4em;
+  }
+
+  input {
+    font-size: 1em;
+  }
+
+  button {
+    font-size: 1.1em;
+  }
 }
 
 .tour-card {
@@ -184,7 +316,6 @@ export default {
     }
   }
 
-  /* Image Slider Styles */
   .slider-container {
     position: relative;
     width: 100%;

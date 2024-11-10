@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar">
     <div class="logo">
-      <img :src="logo" />
+      <img
+        src="https://mir-s3-cdn-cf.behance.net/projects/404/9be656199017475.Y3JvcCwxNjE2LDEyNjQsMCww.jpg"
+      />
     </div>
     <ul class="nav-links">
       <li>
@@ -35,7 +37,7 @@ export default {
 // Navbar SCSS
 $primary-color: #19232c;
 $secondary-color: #3498db;
-$highlight-color: #e74c3c;
+$highlight-color: #3a8f9c;
 $background-color: #ecf0f1;
 $font-family: "Arial", sans-serif;
 

@@ -30,10 +30,8 @@ export default {
   },
   methods: {
     handleReservation(reservation) {
-      // Save the reservation data from the child component
       this.reservationData = reservation;
     },
-    // You can add additional methods to fetch tours, etc.
   },
   created() {
     this.$store.dispatch("fetchTours");
@@ -73,7 +71,6 @@ export default {
   margin-top: 50px;
 }
 
-/* Responsive Layout */
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
